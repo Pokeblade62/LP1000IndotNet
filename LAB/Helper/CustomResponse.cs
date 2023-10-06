@@ -1,4 +1,4 @@
-﻿namespace XapauServer.Helpers
+﻿namespace Helpers
 {
     public class CustomResponse<T>
     {

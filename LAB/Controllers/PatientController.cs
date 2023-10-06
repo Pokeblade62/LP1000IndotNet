@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System.Data;
-using XapauServer.Helpers;
+using Helpers;
 
 namespace LAB.Controllers
 {
