@@ -22,6 +22,7 @@ namespace LAB.Controllers
         }
 
 
+        //add
 
         [HttpPost]
         public async Task<ActionResult<CustomResponse<Patient>>> AddPatient(Patient newPatient)
@@ -29,7 +30,7 @@ namespace LAB.Controllers
 
             Console.WriteLine(newPatient);
             string jsonString = JsonConvert.SerializeObject(newPatient, Formatting.Indented);
-            // Log the JSON string to the console
+
             Console.WriteLine(jsonString);
 
             try
@@ -37,7 +38,7 @@ namespace LAB.Controllers
                 await _context.patient.AddAsync(newPatient);
                 await _context.SaveChangesAsync();
 
-                var patient = _context.patient.FirstOrDefault(p => p.Name == newPatient.Name);
+                var patient = _context.patient.FirstOrDefault(p => p.Email == newPatient.Email);
 
                 var response = new CustomResponse<Patient>
                 {
@@ -62,6 +63,7 @@ namespace LAB.Controllers
 
 
 
+        //update
 
         [HttpPut("{id}")]
         public async Task<ActionResult<CustomResponse<Patient>>> UpdatePatient(int id, Patient updatedPatient)
@@ -106,6 +108,9 @@ namespace LAB.Controllers
             }
         }
 
+
+        //get
+
         [HttpGet]
         public IActionResult GetPatients()
         {
@@ -126,6 +131,7 @@ namespace LAB.Controllers
             }
         }
 
+        //delete
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<CustomResponse<Patient>>> DeletePatient(int id, Patient updatedPatient)

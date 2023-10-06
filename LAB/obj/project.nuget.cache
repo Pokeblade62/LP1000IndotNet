@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QKBpKgexjq0c+3HZrGksmg76edfABksEv1pvPovydBwhW9X/WRVSyrbt9XKoJuQyuO27qNNwU5sSxhA9125ywQ==",
+  "dgSpecHash": "GUv4H6PRFbUiLqba9U4KuAsy/FWVNC8Czp+tk9lsCqRT4aqm9uE5RhVHXnGZjvF0G3apJcqEFTIFuOjhJ2nMSg==",
   "success": true,
   "projectFilePath": "C:\\Users\\yeshu\\source\\repos\\LAB\\LAB\\LAB.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\yeshu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\yeshu\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\yeshu\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",
     "C:\\Users\\yeshu\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.5\\k4os.compression.lz4.streams.1.3.5.nupkg.sha512",

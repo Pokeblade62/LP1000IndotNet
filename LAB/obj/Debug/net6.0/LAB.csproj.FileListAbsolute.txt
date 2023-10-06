@@ -71,3 +71,4 @@ C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.Extensions.Option
 C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\BCrypt.Net-Next.dll

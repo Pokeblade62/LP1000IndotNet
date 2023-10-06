@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> user { get; set; }
         public DbSet<Patient> patient { get; set; }
        
     }
