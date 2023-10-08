@@ -5,6 +5,13 @@ using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Org.BouncyCastle.Crypto.Generators;
 using Helpers;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
+
 
 namespace LAB.Controllers
 {
@@ -12,12 +19,20 @@ namespace LAB.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly DataContext _context;
 
-        public UserController(DataContext context)
+
+        private readonly DataContext _context;
+        private readonly IConfiguration _configuration;
+
+        public UserController(DataContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
+
+        
+
+    
 
 
         [HttpGet]
@@ -95,7 +110,7 @@ namespace LAB.Controllers
 
 
         [HttpPost("signin")]
-        public async Task<ActionResult<CustomResponse<Signin>>> Signin(Signin signinRequest)
+        public async Task<ActionResult<string>> Signin(Signin signinRequest)
         {
 
             try
@@ -112,15 +127,38 @@ namespace LAB.Controllers
                 {
                     return NotFound("Email or password error");
                 }
-
-                var response = new CustomResponse<User>
+                else
                 {
-                    status = true,
-                    message = "sign in success",
-                    data = user
-                };
 
-                return Ok(response);
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
+                    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                    Console.WriteLine(user.Permission);
+                    Console.WriteLine(_configuration["JwtSettings:Audience"]);
+
+
+                    var token = new JwtSecurityToken(
+                      issuer: _configuration["JwtSettings:Issuer"],
+                      audience: _configuration["JwtSettings:Audience"],
+                   
+
+                      claims: new[] {
+                                 new Claim("permission",user.Permission)
+                      },
+
+                      expires: DateTime.Now.AddMinutes(30),
+                      signingCredentials: creds);
+                   
+
+                    return new JwtSecurityTokenHandler().WriteToken(token);
+
+
+                }
+               
+
+
+
+
             }
             catch (Exception e)
             {

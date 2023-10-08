@@ -1,8 +1,15 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
+using System.Security.Claims;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var Config = builder.Configuration;
 
 
 
@@ -17,6 +24,67 @@ builder.Services.AddCors(options =>
         //builder.SetIsOriginAllowed(origin => true);
     });
 });
+
+
+
+Console.WriteLine("AUDIENCE");
+Console.WriteLine(Config["JwtSettings: Audience"]);
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = Config["JwtSettings:Issuer"],
+        ValidAudience = Config["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(Config["JwtSettings:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+});
+
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("SuperAdminPolicy", policy =>
+    {
+        policy.RequireClaim("permission", "super-admin");
+    });
+
+    options.AddPolicy("ViewPolicy", policy =>
+    {
+        policy.RequireClaim("permission", "view");
+    });
+
+    options.AddPolicy("CombinedPolicy", policy =>
+    {
+        policy.RequireAssertion(context =>
+        {
+            
+            return context.User.HasClaim(c =>
+                (c.Type == "permission" && c.Value == "super-admin") ||
+                (c.Type == "permission" && c.Value == "view")
+            );
+        });
+    });
+
+
+});
+
+
+
+builder.Services.AddAuthorization();
+
+
+
+
 
 // Add services to the container.
 
@@ -40,6 +108,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

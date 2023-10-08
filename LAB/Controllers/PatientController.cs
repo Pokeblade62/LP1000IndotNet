@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System.Data;
 using Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LAB.Controllers
 {
@@ -23,7 +24,7 @@ namespace LAB.Controllers
 
 
         //add
-
+        [Authorize(Policy = "SuperAdminPolicy")]
         [HttpPost]
         public async Task<ActionResult<CustomResponse<Patient>>> AddPatient(Patient newPatient)
         {
@@ -64,7 +65,7 @@ namespace LAB.Controllers
 
 
         //update
-
+        [Authorize(Policy = "SuperAdminPolicy")]
         [HttpPut("{id}")]
         public async Task<ActionResult<CustomResponse<Patient>>> UpdatePatient(int id, Patient updatedPatient)
         {
@@ -110,7 +111,7 @@ namespace LAB.Controllers
 
 
         //get
-
+        [Authorize(Policy = "CombinedPolicy")]
         [HttpGet]
         public IActionResult GetPatients()
         {
@@ -132,7 +133,7 @@ namespace LAB.Controllers
         }
 
         //delete
-
+        [Authorize(Policy = "SuperAdminPolicy")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<CustomResponse<Patient>>> DeletePatient(int id, Patient updatedPatient)
         {

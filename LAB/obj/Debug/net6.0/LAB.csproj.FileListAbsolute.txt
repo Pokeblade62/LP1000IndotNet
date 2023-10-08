@@ -72,3 +72,10 @@ C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.Extensions.Primit
 C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\yeshu\source\repos\LAB\LAB\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
